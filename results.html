@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transmission Analysis Results</title>
+        <link href="https://fonts.googleapis.com/css2?family=Metropolis:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='data.css') }}">
+    
+        <!-- Button -->
+        <link rel="stylesheet" href="./dist/css/pheasant-demure-buttons.css" type="text/css" media="all" />
+    
+        <!-- Additional necessary elements -->
+    </head>
+    
+    <body>
+        <!-- Write the heading -->
+        <div class="header_banner">
+            <h1>Transmission Data from Source Device</h1>
+        </div>
+    
+        <div class="file_up_loaded_banner">
+            <h2>File Uploaded: {{ filename }}</h2>
+        </div>
+    
+        <button type="button" class="collapsible">List of Source IPs</button>
+        <div class="content">
+            <ul>
+                {% for ip in source_ips %}
+                    <li>{{ ip }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <!-- Collapsible List of Destination IPs -->
+        <button type="button" class="collapsible">List of Destination IPs</button>
+        <div class="content">
+            <ul>
+                {% for ip in destination_ips %}
+                    <li>{{ ip }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <script>
+            // JavaScript for collapsible functionality
+            document.addEventListener("DOMContentLoaded", function () {
+                var coll = document.querySelectorAll(".collapsible");
+                coll.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        var content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
+                });
+            });
+        </script>
+    
+        <!-- <hr width="100%" size="4" color=#cccccc noshade> -->
+    
+        <!-- <div class="indiv_source_banner">
+            <h2>Inputted IPv4 Source: {{ source_ip }}</h2>
+        </div> -->
+    
+        <div class="indiv_source_banner">
+            <h2>Source IP with Most Destinations: {{ source_ip }}</h2>
+        </div>
+    
+    
+        <!-- Section for Source IP from user input -->
+        <div class="section-container">
+            <div>
+                {{ chart_html |safe }}
+            </div>
+            {% if stats %}
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>IPv4</th>
+                        <th>Location</th>
+                        <th>Country</th>
+                        <th>Transmissions</th>
+                        <th>Error Percentage</th>
+                        <th>Transmission Time Avg</th>
+                        <th>Time Std Dev</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat.domain }}</td>
+                        <td>{{ stat.ipv4 }}</td>
+                        <td>{{ stat.location }}</td>
+                        <td>{{ stat.country }}</td>
+                        <td>{{ stat.transmissions }}</td>
+                        <td>{{ stat.error_percentage }}</td>
+                        <td>{{ stat.average_time_delta }}</td>
+                        <td>{{ stat.std_dev_time_delta }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No data available.</p>
+            {% endif %}
+
+            <!-- Table for user input IP -->
+
+    
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            let sortDirection = [true, true, true, true, true, true, true, true]; // Updated for 8 columns
+            // Function to sort the table based on column index for max source IP
+            function sortTableMax(columnIndex) {
+                let table = document.getElementById("maxResultsTable");
+                let rows = Array.from(table.rows).slice(1); // Get all rows except the header
+                let isAscending = sortDirection[columnIndex];
+    
+                // Sort rows based on the column
+                rows.sort((a, b) => {
+                    let cellA = a.cells[columnIndex].innerText.trim();
+                    let cellB = b.cells[columnIndex].innerText.trim();
+    
+                    // Handle numerical sorting for Transmissions, Error Percentage, Average Time, and Standard Deviation columns
+                    if (columnIndex === 4 || columnIndex === 5 || columnIndex === 6 || columnIndex === 7) {
+                        cellA = parseFloat(cellA);
+                        cellB = parseFloat(cellB);
+                    }
+    
+                    if (cellA < cellB) return isAscending ? -1 : 1;
+                    if (cellA > cellB) return isAscending ? 1 : -1;
+                    return 0;
+                });
+    
+                // Reorder rows in the table
+                rows.forEach(row => table.appendChild(row));
+    
+                // Toggle sort direction and update arrows
+                sortDirection[columnIndex] = !isAscending;
+                updateArrows(columnIndex, isAscending, "maxArrow");
+            }
+    
+            // Function to update the arrow direction in the table header
+            function updateArrows(columnIndex, isAscending, prefix) {
+                // Reset all arrows
+                for (let i = 0; i < 8; i++) { // Updated for 8 columns
+                    document.getElementById(`${prefix}${i}`).textContent = '';
+                }
+    
+                // Update the arrow for the clicked column
+                const arrow = document.getElementById(`${prefix}${columnIndex}`);
+                arrow.textContent = isAscending ? '↑' : '↓';
+            }
+        </script>
+
+        <!-- <a href="geeksforgeeks.png" download="GFG">
+            <button type="button">Download IP Data</button>
+        </a> -->
+    
+        <div class="footer" id="redirect-container">
+            <a href="http://127.0.0.1:5000/" class="pheasant-demure-button solid light hover blink round-corner">
+                <span class="label">Submit another document</span>
+            </a>
+        </div>
+    
+    </body>
+    </html>

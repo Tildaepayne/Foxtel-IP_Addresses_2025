@@ -1,0 +1,260 @@
+/* ---------------------------- HTML ESSENTIALS ----------------------------- */
+
+/* Apply the Metropolis font to the body */
+body {
+    font-family: 'Metropolis', sans-serif;
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Style the heading */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #fbfdff; 
+}
+
+/* Style the subheading */
+h2 {
+    text-align: center;
+    color: #fbfdff; 
+}
+
+/* ------------------------------- CONTAINERS ------------------------------- */
+
+/* Header/Logo Title */
+.header_banner {
+    font-size: 12px;
+    padding: 27px;
+    text-align: center;
+    background: #131317;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Header/Logo Title */
+.file_up_loaded_banner {
+    padding: 14px;
+    text-align: center;
+    background: #2b2f41;
+    color: white;
+    font-size: 15px;
+    width: 45%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 10px; /* Adds space below the heading if needed */
+}
+
+/* Header/Logo Title */
+.indiv_source_banner {
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    background: #131317;
+    color: white;
+    margin-bottom: 7px;
+}
+
+/* Style for the container holding the graphs */
+#graphs-container {
+    margin-top: 30px;
+    display: flex;
+    background: #000000;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+/* Graph containers styling */
+#world-map, #australia-map {
+    width: 45%;
+    height: 400px; /* Set a fixed height for the graphs */
+}
+
+
+/* --------------------------------- TABLES --------------------------------- */
+
+
+/* Style for the table */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Style the table header */
+thead {
+    background-color: #1d1d22;
+    color: white;
+    font-size: 1.1em;
+}
+
+/* Style the table rows */
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e9e9e9;
+}
+
+/* Table cells styling */
+td, th {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Table header cell hover effects */
+th:hover {
+    cursor: pointer;
+    background-color: #131317;
+}
+
+/* Arrows for sorting */
+#arrow0, #arrow1, #arrow2, #arrow3, #arrow4, #arrow5, #arrow6 {
+    font-size: 1.2em;
+    margin-left: 5px;
+}
+
+/* Redirect container styling in footer */
+#redirect-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#redirect-container a {
+    font-size: 1.1em;
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+#redirect-container a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------- FOOTER ---------------------------------*/
+
+.footer {
+    background-color: #101013; /* Change to desired color */
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+/* --------------------------------- BUTTONS ---------------------------------*/
+
+@keyframes pheasantBounce {
+    0% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    25% {
+      opacity: 0;
+      transform: translateX(5px) scale(0.9);
+    }
+    26% {
+      opacity: 0;
+      transform: translateX(-5px) scale(0.9);
+    }
+    55% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+}
+.pheasant-demure-button {
+    /*
+     --------
+     * Color Palette
+     --------
+     */
+    --button-color-white: #fff;
+    --button-color-black: #d9e1f3;
+    --button-color-salsa: #f15152;
+    /*
+     --------
+     * CSS Vars
+     --------
+     */
+    --button-light-bg-color: var(--button-color-white);
+    --button-light-text-color: var(--button-color-black);
+    --button-light-text-hover-color: var(--button-color-salsa);
+    --button-light-border-color: var(--button-color-white);
+    --button-dark-bg-color: var(--button-color-black);
+    --button-dark-text-color: var(--button-color-white);
+    --button-dark-text-hover-color: var(--button-color-salsa);
+    --button-dark-border-color: var(--button-color-black);
+    --button-icon-color: var(--button-color-salsa);
+    /*
+     --------
+     * Style
+     --------
+     */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Cairo", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    height: 3.125rem;
+    padding: 0 1.5625rem;
+    letter-spacing: 0.125rem;
+    overflow: hidden;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .pheasant-demure-button,
+  button.pheasant-demure-button,
+  input[type=submit].pheasant-demure-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+.pheasant-demure-button.solid.light.hover.blink:hover, .pheasant-demure-button.solid.light.hover.blink:focus {
+    background-color: var(--button-dark-bg-color);
+    color: var(--button-dark-text-color);
+  }
+
+
+/* ------------------------------- COLLAPSIBLE -------------------------------*/
+  .collapsible {
+    background-color: #131317;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 60%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    display: block;  
+    margin: 0 auto;
+    margin-bottom: 5px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #476A6F;
+    width: 60%;
+    display: block;  
+    margin: 0 auto;
+  }
+  
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #cccccc;
+    width: 57.5%;
+    margin: 0 auto;
+  }
+
+
+
+
